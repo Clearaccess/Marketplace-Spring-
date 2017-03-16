@@ -1,0 +1,46 @@
+SQL> @@createTables.sql
+
+Table USERS created.
+
+
+Table USERS altered.
+
+
+Table ITEMS created.
+
+
+Table BIDS created.
+
+SQL> @@createSeq.sql
+
+Sequence USER_SEQ created.
+
+
+Sequence BID_SEQ created.
+
+
+Sequence ITEM_SEQ created.
+
+SQL> @@createProcUsers.sql
+
+Trigger USER_BIR compiled
+
+SQL> @@createProcBids.sql
+
+Trigger BID_BIR compiled
+
+SQL> @@createProcItems.sql
+
+Trigger ITEM_BIR compiled
+
+SQL> @@fillData.sql
+
+6 rows inserted.
+
+
+4 rows inserted.
+
+
+4 rows inserted.
+
+SQL> SPOOL OFF

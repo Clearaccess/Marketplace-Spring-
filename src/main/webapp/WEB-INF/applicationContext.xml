@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd"
-       xmlns:context="http://www.springframework.org/schema/context"
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/jee
+        http://www.springframework.org/schema/jee/spring-jee.xsd"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns="http://www.springframework.org/schema/beans"></beans>
+       xmlns="http://www.springframework.org/schema/beans"
+       xmlns:jee="http://www.springframework.org/schema/jee">
+
+    <jee:jndi-lookup id="dataSource"
+                     jndi-name="jdbc/myoracle"
+                     resource-ref="true"/>
+
+    <bean id="oracleDaoFactory" class="com.marketplace.spring.dao.oracleDAO.OracleDAOFactory">
+        <property name="dataSource" ref="dataSource"/>
+    </bean>
+
+    <bean id="helperController" class="com.marketplace.spring.controllers.HelperController"/>
+
+</beans>

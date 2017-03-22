@@ -1,4 +1,5 @@
-<%@ page import="to.User" %>
+<%@ page import="com.marketplace.spring.models.User" %>
+<%@ page isELIgnored="false" %>
 
 <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="container-fluid">

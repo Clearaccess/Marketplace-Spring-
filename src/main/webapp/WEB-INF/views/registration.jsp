@@ -1,11 +1,14 @@
 <!DOCTYPE html>
+
+<%@ page isELIgnored="false" %>
+
 <html>
 
 <head>
     <title>Registration</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="../css/registration.css">
+    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/bootstrap-theme.min.css">
+    <link rel="stylesheet" href="resources/css/registration.css">
 </head>
 
 <body>
@@ -58,12 +61,12 @@
         </form>
 
     </div>
-    <script src="../js/jquery-3.1.1.min.js"></script>
-    <script src="../js/jquery.validate.min.js"></script>
-    <script src="../js/additional-methods.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/registration/validate.js"></script>
-    <script src="../js/redirect.js"></script>
+    <script src="resources/js/jquery-3.1.1.min.js"></script>
+    <script src="resources/js/jquery.validate.min.js"></script>
+    <script src="resources/js/additional-methods.min.js"></script>
+    <script src="resources/js/bootstrap.min.js"></script>
+    <script src="resources/js/registration/validate.js"></script>
+    <script src="resources/js/redirect.js"></script>
 </body>
 
 </html>

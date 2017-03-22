@@ -1,21 +1,21 @@
 <!DOCTYPE html>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-        <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
-            <%@ taglib prefix="t" uri="http://tiles.apache.org/tags-tiles" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+<%@ page isELIgnored="false" %>
 
-                <jsp:directive.page import="to.User" />
-                <jsp:directive.page import="to.Item" />
-                <jsp:directive.page import="to.Bid" />
+                <jsp:directive.page import="com.marketplace.spring.models.User" />
+                <jsp:directive.page import="com.marketplace.spring.models.Item" />
+                <jsp:directive.page import="com.marketplace.spring.models.Bid" />
                 <jsp:directive.page import="java.util.ArrayList" />
-                <jsp:directive.page import="view.entities.ViewItem" />
+                <jsp:directive.page import="com.marketplace.spring.views.entities.ViewItem" />
                 <html>
 
                 <head>
                     <title>Items</title>
-                    <link rel="stylesheet" href="../css/bootstrap.min.css">
-                    <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-                    <link rel="stylesheet" href="../css/showItems.css">
+                    <link rel="stylesheet" href="resources/css/bootstrap.min.css">
+                    <link rel="stylesheet" href="resources/css/bootstrap-theme.min.css">
+                    <link rel="stylesheet" href="resources/css/showItems.css">
                 </head>
 
                 <body>
@@ -55,56 +55,55 @@
                                 <div class="table-responsive">
                                     <table class="table table-hover">
                                         <tbody>
-                                            <c:set var="items" scope="request" value="${pageContext.request.getAttribute(" items ")}"/>
-                                            <c:forEach var="i" begin="0" end="${items.size()}">
+                                            <c:forEach var="item" items="${items}">
                                                 <tr>
                                                     <td class="text-center">
-                                                        <c:out value="${items[i].getItemId()}" />
+                                                        ${item.getItemId()}
                                                     </td>
                                                     <td class="text-center">
-                                                        <c:out value="${items[i].getTitle()}" />
+                                                        ${item.getTitle()}
                                                     </td>
                                                     <td class="text-center">
-                                                        <c:if test="${items[i].getDescription()!=null}">
-                                                            <c:out value="${items[i].getDescription()}" />
+                                                        <c:if test="${item.getDescription()!=null}">
+                                                            ${item.getDescription()}
                                                         </c:if>
                                                     </td>
                                                     <td class="text-center">
-                                                        <c:out value="${items[i].getFullNameSeller()}"/>
+                                                        ${item.getFullNameSeller()}
                                                     </td>
                                                     <td class="text-center">
-                                                        <c:out value="${items[i].getStartPrice()}"/>
+                                                        ${item.getStartPrice()}
                                                     </td>
                                                     <td class="text-center">
-                                                        <c:if test="${items[i].getBidIncrement()!=0.0}">
-                                                            <c:out value="${items[i].getBidIncrement()}"/>
+                                                        <c:if test="${item.getBidIncrement()!=0.0}">
+                                                            ${item.getBidIncrement()}
                                                         </c:if>
                                                     </td>
                                                     <td class="text-center">
-                                                        <c:if test="${items[i].getBestOffer()!=0.0}">
-                                                            <c:out valur="${items[i].getBestOffer()}" />
+                                                        <c:if test="${item.getBestOffer()!=0.0}">
+                                                            ${item.getBestOffer()}
                                                         </c:if>
                                                     </td>
                                                     <td class="text-center">
-                                                        <c:if test="${items[i].getFullNameBidder()!=null}">
-                                                            <c:out value="${items[i].getFullNameBidder()}"/>
+                                                        <c:if test="${item.getFullNameBidder()!=null}">
+                                                            ${item.getFullNameBidder()}
                                                         </c:if>
                                                     </td>
                                                     <td class="text-center">
-                                                        <c:if test="${!items[i].isBuyItNow()}">
-                                                            <c:out value="${items[i].getStopDate()}"/>
+                                                        <c:if test="${!item.isBuyItNow()}">
+                                                            ${item.getStopDate()}
                                                         </c:if>
                                                     </td>
-                                                    <c:if test="${items[i].isBuyItNow()}">
+                                                    <c:if test="${item.isBuyItNow()}">
                                                         <td class="text-center">
-                                                            <c:if test="${pageContext.session.getAttribute("user")!=null && ((User)pageContext.session.getAttribute("user")).getUserId()!=items[i].getSellerId()}">
+                                                            <c:if test="${sessionScope.user != null && sessionScope.user.getUserId() != item.getSellerId()}">
                                                                 <jsp:directive.include file="biddingBuy.jsp" />
                                                             </c:if>
                                                         </td>
                                                     </c:if>
-                                                    <c:if test="${!items[i].isBuyItNow()}">
+                                                    <c:if test="${!item.isBuyItNow()}">
                                                         <td class="text-center">
-                                                            <c:if test="${pageContext.session.getAttribute("user")!=null && ((User)pageContext.session.getAttribute("user")).getUserId()!=items[i].getSellerId()}">
+                                                            <c:if test="${sessionScope.user != null && sessionScope.user.getUserId() != item.getSellerId()}">
                                                                 <jsp:directive.include file="biddingDoBid.jsp" />
                                                             </c:if>
                                                         </td>
@@ -163,9 +162,9 @@
                             </div>
                         </div>
                     </div>
-                    <script src="../js/jquery-3.1.1.min.js"></script>
-                    <script src="../js/bootstrap.min.js"></script>
-                    <script src="../js/showItems/controlMain.js"></script>
+                    <script src="resources/js/jquery-3.1.1.min.js"></script>
+                    <script src="resources/js/bootstrap.min.js"></script>
+                    <script src="resources/js/showItems/controlMain.js"></script>
                 </body>
 
                 </html>

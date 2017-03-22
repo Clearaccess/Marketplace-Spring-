@@ -1,5 +1,17 @@
 package com.marketplace.spring.controllers;
 
+import com.marketplace.spring.dao.BidDAO;
+import com.marketplace.spring.dao.ItemDAO;
+import com.marketplace.spring.dao.UserDAO;
+import com.marketplace.spring.dao.oracleDAO.OracleBidDAO;
+import com.marketplace.spring.dao.oracleDAO.OracleItemDAO;
+import com.marketplace.spring.dao.oracleDAO.OracleUserDAO;
+import com.marketplace.spring.models.Bid;
+import com.marketplace.spring.models.Item;
+import com.marketplace.spring.models.User;
+import com.marketplace.spring.views.entities.ViewItem;
+import org.springframework.stereotype.Component;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -9,7 +21,9 @@ import java.util.ArrayList;
 /**
  * Created by Aleksandr_Vaniukov on 2/10/2017.
  */
-public class HelperController {/*
+
+@Component
+public class HelperController {
     private static UserDAO userDAO;
     private static ItemDAO itemDAO;
     private static BidDAO bidDAO;
@@ -185,5 +199,4 @@ public class HelperController {/*
     private boolean isSellItem(ViewItem item) {
         return item.isBuyItNow() && item.getFullNameBidder() != null;
     }
-    */
 }

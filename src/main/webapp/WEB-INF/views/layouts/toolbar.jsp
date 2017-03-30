@@ -1,10 +1,8 @@
-<%@ page import="com.marketplace.spring.models.User" %>
-<%@ page isELIgnored="false" %>
-
+<jsp:directive.page import="com.marketplace.spring.models.User" />
 <nav class="navbar navbar-default navbar-fixed-top">
                 <div class="container-fluid">
                     <div class="navbar-header">
-                        <a class="navbar-brand" href="#">Online marketplace</a>
+                        <a class="navbar-brand" href="/">Online marketplace</a>
                     </div>
 
                     <div class="collapse navbar-collapse">

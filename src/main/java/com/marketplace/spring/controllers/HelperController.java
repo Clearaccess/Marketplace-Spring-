@@ -7,6 +7,7 @@ import com.marketplace.spring.dao.oracleDAO.OracleBidDAO;
 import com.marketplace.spring.dao.oracleDAO.OracleItemDAO;
 import com.marketplace.spring.dao.oracleDAO.OracleUserDAO;
 import com.marketplace.spring.models.Bid;
+import com.marketplace.spring.models.Criteria;
 import com.marketplace.spring.models.Item;
 import com.marketplace.spring.models.User;
 import com.marketplace.spring.views.entities.ViewItem;
@@ -17,6 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.DoubleSummaryStatistics;
 
 /**
  * Created by Aleksandr_Vaniukov on 2/10/2017.
@@ -52,7 +54,7 @@ public class HelperController {
             Bid bestBid = bidDAO.getBestBidByItemId(item.getItemId());
             User bidder = userDAO.getById(bestBid.getBidderId());
             ViewItem temp = new ViewItem(item, seller, bidder, bestBid);
-            if (!isSellItem(temp)) {
+            if (!isSelledItem(temp)) {
                 viewItems.add(temp);
             }
         }
@@ -72,7 +74,28 @@ public class HelperController {
             Bid bestBid = bidDAO.getBestBidByItemId(item.getItemId());
             User bidder = userDAO.getById(bestBid.getBidderId());
             ViewItem temp = new ViewItem(item, seller, bidder, bestBid);
-            if (!isSellItem(temp)) {
+            if (!isSelledItem(temp)) {
+                viewItems.add(temp);
+            }
+        }
+
+
+        return viewItems;
+    }
+
+    public ArrayList<ViewItem> getViewItemsByCriteria(HttpServletRequest request) {
+
+        int field = Integer.parseInt(request.getParameter("field"));
+        String keyWord = request.getParameter("keyWord");
+        ArrayList<ViewItem> viewItems = new ArrayList<ViewItem>();
+        ArrayList<Item> items = itemDAO.getItemsBySubstr(field, keyWord);
+
+        for (Item item : items) {
+            User seller = userDAO.getById(item.getSellerId());
+            Bid bestBid = bidDAO.getBestBidByItemId(item.getItemId());
+            User bidder = userDAO.getById(bestBid.getBidderId());
+            ViewItem temp = new ViewItem(item, seller, bidder, bestBid);
+            if (!isSelledItem(temp)) {
                 viewItems.add(temp);
             }
         }
@@ -162,6 +185,83 @@ public class HelperController {
         bidDAO.insert(newBid);
     }
 
+    public ArrayList<ViewItem> getViewItemsBySearchParameters(Criteria criteria) {
+
+
+        ArrayList<ViewItem> viewItems = new ArrayList<ViewItem>();
+        ArrayList<Item> items = itemDAO.getAll();
+
+        for (Item item : items) {
+            if(isItemOfCriteria(item,criteria)) {
+                User seller = userDAO.getById(item.getSellerId());
+                Bid bestBid = bidDAO.getBestBidByItemId(item.getItemId());
+                User bidder = userDAO.getById(bestBid.getBidderId());
+                ViewItem temp = new ViewItem(item, seller, bidder, bestBid);
+                if (!isSelledItem(temp)) {
+                    viewItems.add(temp);
+                }
+            }
+        }
+
+
+        return viewItems;
+    }
+
+    private boolean isItemOfCriteria(Item item, Criteria criteria){
+
+        if(criteria.getItemUID()!=null && item.getItemId()!=criteria.getItemUID()){
+            return false;
+        }
+
+        if(criteria.getTitle()!=null && !(item.getTitle().toLowerCase().contains(criteria.getTitle().toLowerCase()))){
+            return false;
+        }
+
+        if(criteria.getDescription()!=null && !(item.getDescription().toLowerCase().contains(criteria.getDescription().toLowerCase()))){
+            return false;
+        }
+
+        if(criteria.getOnlyBuyItems()!= item.isBuyItNow()){
+            return false;
+        }
+
+        if(criteria.getStartDate()!=null && !item.getStartBiddingDate().equals(criteria.getStartDate())){
+            return false;
+        }
+
+        if(criteria.getExpireDate()!=null && !(item.getStartBiddingDate().getTime()+item.getTimeLeft()>=criteria.getExpireDate().getTime().getTime())){
+            return false;
+        }
+
+        ArrayList<Bid> bids=bidDAO.getAllByItemId(item.getItemId());
+
+        if(criteria.getBidderCount()!=null && bids.size()!=criteria.getBidderCount()){
+            return false;
+        }
+
+        if(criteria.getMinPrice()!=null || criteria.getMaxPrice()!=null) {
+            if(bids.isEmpty()){
+                return false;
+            }
+
+            Double minPrice = Double.MAX_VALUE;
+            Double maxPrice=Double.MIN_VALUE;
+
+            for(Bid bid: bids){
+                minPrice=Math.min(bid.getBid(),minPrice);
+                maxPrice=Math.max(bid.getBid(),maxPrice);
+            }
+
+            if((criteria.getMinPrice()!=null && minPrice<criteria.getMinPrice())
+                    ||
+                    (criteria.getMaxPrice()!=null && maxPrice>criteria.getMaxPrice())){
+                return false;
+            }
+        }
+
+        return  true;
+    }
+
     private Item fillItem(HttpServletRequest request, HttpSession session) {
         String title = request.getParameter("title");
         String description = request.getParameter("description");
@@ -196,7 +296,7 @@ public class HelperController {
         return newItem;
     }
 
-    private boolean isSellItem(ViewItem item) {
+    private boolean isSelledItem(ViewItem item) {
         return item.isBuyItNow() && item.getFullNameBidder() != null;
     }
 }

@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+
+    <definition name="base" template="/WEB-INF/views/layouts/baseLayout.jsp">
+    </definition>
+
+    <definition name="login" extends="base">
+        <put-attribute name="header" value="/WEB-INF/views/layouts/headers/headerLogin.jsp" />
+        <put-attribute name="toolbar" value="" />
+        <put-attribute name="body" value="/WEB-INF/views/layouts/login.jsp" />
+        <put-attribute name="script" value="/WEB-INF/views/layouts/scripts/scriptLogin.jsp" />
+    </definition>
+
+    <definition name="registration" extends="base">
+        <put-attribute name="header" value="/WEB-INF/views/layouts/headers/headerRegistration.jsp" />
+        <put-attribute name="toolbar" value="" />
+        <put-attribute name="body" value="/WEB-INF/views/layouts/registration.jsp" />
+        <put-attribute name="script" value="/WEB-INF/views/layouts/scripts/scriptRegistration.jsp" />
+    </definition>
+
+    <definition name="showItems" extends="base">
+        <put-attribute name="header" value="/WEB-INF/views/layouts/headers/headerShowItems.jsp" />
+        <put-attribute name="toolbar" value="/WEB-INF/views/layouts/toolbar.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/layouts/showItems.jsp" />
+        <put-attribute name="script" value="/WEB-INF/views/layouts/scripts/scriptShowItems.jsp" />
+    </definition>
+
+    <definition name="showMyItems" extends="base">
+        <put-attribute name="header" value="/WEB-INF/views/layouts/headers/headerShowItems.jsp" />
+        <put-attribute name="toolbar" value="/WEB-INF/views/layouts/toolbar.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/layouts/showMyItems.jsp" />
+        <put-attribute name="script" value="/WEB-INF/views/layouts/scripts/scriptShowItems.jsp" />
+    </definition>
+
+    <definition name="editItem" extends="base">
+        <put-attribute name="header" value="/WEB-INF/views/layouts/headers/headerEditItem.jsp" />
+        <put-attribute name="toolbar" value="/WEB-INF/views/layouts/toolbar.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/layouts/editItem.jsp" />
+        <put-attribute name="script" value="/WEB-INF/views/layouts/scripts/scriptEditItem.jsp" />
+    </definition>
+
+    <definition name="advancedSearch" extends="base">
+        <put-attribute name="header" value="/WEB-INF/views/layouts/headers/headerAdvancedSearch.jsp" />
+        <put-attribute name="toolbar" value="/WEB-INF/views/layouts/toolbar.jsp" />
+        <put-attribute name="body" value="/WEB-INF/views/layouts/advancedSearch.jsp" />
+        <put-attribute name="script" value="/WEB-INF/views/layouts/scripts/scriptAdvancedSearch.jsp" />
+    </definition>
+</tiles-definitions>

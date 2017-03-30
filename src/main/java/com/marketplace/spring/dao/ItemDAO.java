@@ -1,5 +1,6 @@
 package com.marketplace.spring.dao;
 
+import com.marketplace.spring.models.Criteria;
 import com.marketplace.spring.models.Item;
 
 import java.util.ArrayList;

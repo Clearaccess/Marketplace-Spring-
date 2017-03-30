@@ -38,7 +38,7 @@ public class AccessInterceptor extends HandlerInterceptorAdapter {
             }
         } else {
             //Attempt access to pages when no authorize user
-            if(session.getAttribute("user")==null && (requestURL.equals("/editItem") || requestURL.equals("/showMyItems"))){
+            if(session.getAttribute("user")==null && (requestURL.equals("/advancedSearch") || requestURL.equals("/editItem") || requestURL.equals("/showMyItems"))){
                 response.sendRedirect("/login");
                 return false;
             } else {

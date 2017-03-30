@@ -1,21 +1,15 @@
-<!DOCTYPE html>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+        <%@ taglib prefix="s" uri="http://www.springframework.org/tags" %>
+            <%@ taglib prefix="t" uri="http://tiles.apache.org/tags-tiles" %>
 
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ page isELIgnored="false" %>
+                <jsp:directive.page import="com.marketplace.spring.models.User" />
+                <jsp:directive.page import="com.marketplace.spring.models.Item" />
+                <jsp:directive.page import="com.marketplace.spring.models.Bid" />
+                <jsp:directive.page import="java.util.ArrayList" />
+                <jsp:directive.page import="com.marketplace.spring.views.entities.ViewItem" />
 
-<html>
-
-<head>
-    <title>Items</title>
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
-    <link rel="stylesheet" href="../css/bootstrap-theme.min.css">
-    <link rel="stylesheet" href="../css/showItems.css">
-</head>
-
-<body>
-    <jsp:directive.include file="toolbar.jsp"/>
-
-    <div class="container-fluid">
+<div class="container-fluid">
 
         <div class="row">
             <div class="col-sm-offset-1 col-sm-11">
@@ -186,9 +180,3 @@
             </div>
         </div>
     </div>
-    <script src="../js/jquery-3.1.1.min.js"></script>
-    <script src="../js/bootstrap.min.js"></script>
-    <script src="../js/showItems/controlMain.js"></script>
-</body>
-
-</html>

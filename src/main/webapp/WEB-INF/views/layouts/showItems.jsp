@@ -17,15 +17,15 @@
                                 <h5 class="form-signin-heading">Keyword:</h5>
                                 <div class="form-group">
                                     <label class="sr-only" for="inputKeyWord">Key word</label>
-                                    <input name="keyWord" type="text" class="form-control" id="inputKeyWord" placeholder="Key word">
+                                    <input id="inputKeyWord" name="keyWord" type="text" class="form-control" placeholder="Key word">
                                 </div>
-                                <select name="field" class="form-control">
+                                <select id="sSearchField" name="field" class="form-control">
                             <option value="1">UID</option>
                             <option value="2">Title</option>
                             <option value="3">Description</option>
                         </select>
-                                <button type="submit" class="btn btn-primary">Search</button>
-                                <a class="btn btn-default" href="advancedSearch" role="button">Advanced seach</a>
+                                <button id="bSearch" type="button" class="btn btn-primary">Search</button>
+                                <a class="btn btn-default" href="advancedSearch" role="button">Advanced search</a>
                             </form>
                         </div>
                     </div>
@@ -43,8 +43,8 @@
                         <div class="col-sm-12">
                             <div class="table-responsive">
                                 <table class="table table-hover">
-                                    <tbody>
-                                        <c:forEach var="item" items="${items}">
+                                    <tbody id="tBody">
+                                        <!--<c:forEach var="item" items="${items}">
                                             <tr>
                                                 <td class="text-center">
                                                     ${item.getItemId()}
@@ -98,7 +98,7 @@
                                                     </td>
                                                 </c:if>
                                             </tr>
-                                        </c:forEach>
+                                        </c:forEach>-->
                                     </tbody>
                                     <thead>
                                         <tr class="info">

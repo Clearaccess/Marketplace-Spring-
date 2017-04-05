@@ -1,16 +1,19 @@
 package com.marketplace.spring.views.entities;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.fasterxml.jackson.databind.ser.std.DateSerializer;
 import com.marketplace.spring.models.Bid;
 import com.marketplace.spring.models.Item;
 import com.marketplace.spring.models.User;
 
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.Formatter;
 
 /**
  * Created by Aleksandr_Vaniukov on 2/12/2017.
  */
-public class ViewItem {
+public class ViewItem implements Serializable {
 
     private Item item;
     private User seller;
@@ -75,6 +78,7 @@ public class ViewItem {
         return item.getTimeLeft();
     }
 
+    //@JsonSerialize(using = DateSerializer.class)
     public Date getStartBiddingDate() {
         return item.getStartBiddingDate();
     }

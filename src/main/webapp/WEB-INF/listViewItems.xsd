@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema attributeFormDefault="unqualified" elementFormDefault="qualified" targetNamespace="http://localhost:8888/ws/schema" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="ItemsRequest" type="sch:ItemsRequestType" xmlns:sch="http://localhost:8888/ws/schema"/>
+  <xs:complexType name="listType">
+    <xs:sequence>
+      <xs:element type="sch:itemType" name="item" maxOccurs="unbounded" minOccurs="0" xmlns:sch="http://localhost:8888/ws/schema"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ItemsRequestType">
+    <xs:sequence>
+      <xs:element type="sch:listType" name="list" xmlns:sch="http://localhost:8888/ws/schema"/>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="itemType">
+    <xs:sequence>
+      <xs:element name="stopDate" type="xs:string"/>
+      <xs:element name="description" type="xs:string"/>
+      <xs:element name="fullNameSeller" type="xs:string"/>
+      <xs:element name="buyItNow" type="xs:string"/>
+      <xs:element name="timeLeft" type="xs:string"/>
+      <xs:element name="startPrice" type="xs:string"/>
+      <xs:element name="title" type="xs:string"/>
+      <xs:element name="itemId" type="xs:string"/>
+      <xs:element name="sellerId" type="xs:string"/>
+      <xs:element name="bidIncrement" type="xs:string"/>
+      <xs:element name="fullNameBidder" type="xs:string"/>
+      <xs:element name="startBiddingDate" type="xs:string"/>
+      <xs:element name="bestOffer" type="xs:string"/>
+    </xs:sequence>
+  </xs:complexType>
+</xs:schema>
